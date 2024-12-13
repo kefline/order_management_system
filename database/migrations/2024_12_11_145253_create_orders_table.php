@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('customer_id')      
+                  ->constrained()               
+                  ->onDelete('cascade');        
+            $table->string('product_name');
+            $table->integer('quantity');
+            $table->decimal('price', 10, 2);       
+            $table->string('status');             
+            $table->text('notes')->nullable();   
             $table->timestamps();
         });
     }
@@ -24,4 +32,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('orders');
     }
+
+    
 };
